@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="wrap">
     <mainPage id="main"></mainPage>
     <chatbot id="chatbot"></chatbot>
   </div>
@@ -25,16 +25,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#wrap{
+  display: flex;
+}
 #main {
-  /* width:100%; */
   display: inline-block;
   background: skyblue;
+  flex: 1;
 }
 #chatbot {
   display: inline-block;
   background: orange;
   width: 320px;
-  
+  float:right;
 }
 
 h1,

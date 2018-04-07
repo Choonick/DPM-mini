@@ -5,8 +5,5 @@
 </template>
 
 <style scoped>
-  div.main{
-    background: skyblue;
-  }
 
 </style>
