@@ -25,16 +25,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#wrap{
+#wrap {
   display: flex;
 }
 #main {
-  display: inline-block;
   background: skyblue;
+  width: 100%;
+  height: 1000px;
   flex: 1;
 }
 #chatbot {
-  display: inline-block;
   background: orange;
   width: 320px;
   float:right;
