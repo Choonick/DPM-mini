@@ -11,8 +11,10 @@ export default {
 </script>
 
 <style>
-
-body {
+@import url('https://fonts.googleapis.com/css?family=Martel');
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+* {
+  padding: 0;
   margin:0;
 }
 
@@ -20,10 +22,6 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
-  /* margin:0 auto;
-   */
-  margin:0;
+  color: white;
 }
 </style>
