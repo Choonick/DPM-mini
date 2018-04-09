@@ -14,12 +14,14 @@
           </div>
         </div>
         
-        <div class="container" v-for="req in requests" :key="req.id" style="color:black">
+        <div class="container" v-for="req in requests" :key="req.id">
+          
           <div class="req-wrapper" v-if="req.flag=='request'">
             <div class="request">
                 <p>{{req.text}}</p>
             </div>
           </div>
+
           <div class="res-wrapper" v-if="req.flag=='response'">
             <div class="res">
               <p class="textarea1">
@@ -43,6 +45,10 @@
 </template>
 
 <style scoped>
+.container {
+  display: block;
+  /* flex-direction: column !important; */
+}
 .textView-wrapper {
   padding-top: 42px;
 }
@@ -50,7 +56,7 @@
   overflow: auto;
 }
 .req-wrapper {
-  float: right;
+  /* float: right; */
 }
 .request {
   margin-top: 13px;
@@ -144,6 +150,8 @@ export default {
 
   methods: {
     sendMessage() {
+      if(this.textMessage === "") return;
+
       const BASE_URL =
         "http://us-central1-depromeet-mini1-team4.cloudfunctions.net";
       var obj = {
@@ -160,19 +168,16 @@ export default {
       }
       console.log(this.textMessage);
 
-      switch (this.textMessage) {
-        case "오늘날씨":
-          obj.chat = 0;
-          break;
-        case "내일날씨":
+      if(this.textMessage === "오늘날씨"){
+        obj.chat = 0;
+
+      } else if(this.textMessage === "내일날씨"){
           obj.chat = 1;
-          break;
-        case "이번주날씨":
+      } else if(this.textMessage=== "이번주날씨"){
           obj.chat = 2;
-          break;
-        default:
-          console.log(this.textMessage);
+      } else {
           alert("오늘날씨, 내일날씨, 이번주날씨를 검색할 수 있습니다.");
+          this.textMessage = "";
           return;
       }
 
