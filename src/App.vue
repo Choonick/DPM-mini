@@ -23,5 +23,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
+  background: #f0f0f0;
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div id="wrap">
-      <mainPage id="main"></mainPage><chatbot id="chatbot"></chatbot>
+      <mainPage id="main"></mainPage>
+      <chatbot id="chatbot"></chatbot>
   </div>
 </template>
 
@@ -27,15 +28,20 @@ export default {
 #wrap {
   margin:0 auto;
   width:980px;
+  background: #ffffff;
 }
 #main {
   width: 639px;
   display:inline-block;
+  overflow: auto;
 }
 #chatbot {
-  background: orange;
   width: 320px;
+  /* height: 100px; */
+  position: fixed;
+  /* position: absolute; */
   display:inline-block;
+  background: #ffffff;
 }
 
 h1,
