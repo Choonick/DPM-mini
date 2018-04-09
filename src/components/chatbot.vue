@@ -1,8 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div>a</div>
-</template>
-=======
   <div>
       <h1>chatbot</h1>
       <div>body</div>
@@ -91,4 +87,3 @@ export default {
   }
 };
 </script>
->>>>>>> 3aaa4aa8bc698cc19350152a4c778391c947fbee
