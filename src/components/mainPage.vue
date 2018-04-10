@@ -1,7 +1,8 @@
 <template>
-  <div class="wrapa" style="position:relative; overflow:hidden" v-bind:style="{backgroundColor:backgroundColor}">
+  <div class="wrapa" style="position:relative; overflow:hidden" v-bind:style="{backgroundColor:backgroundColor}"
+     v-bind:class="{ 'lightning': !isSunny }">
     <div id="textinfo">
-      <h1 id="title">Weather</h1>
+      <h1 id="title" v-on:click="isSunny =!isSunny">Weather</h1>
       <p><span class="date">{{date1}}</span><span id="date2" class="date" style="margin-left:16px; display:inline-block;">{{date2}}</span></p>
       <p id="description" v-html="description"></p>
        <div id="line">
@@ -34,7 +35,7 @@
     <img v-bind:src="weatherLineImg" v-bind:class="{ 'sunny-line': isSunny, 'cloud-line': !isSunny }">
     <div>
       <p id="weather-detail">오늘의 날씨 자세히 보기</p>
-      <div class="white-box">
+      <div v-if="forecast" class="white-box">
         <h2 class="table-title">Temperature</h2>
         <h3 class="table-subtitle">날짜별 날씨</h3>
         <table style="border-collapse:collapse;">
@@ -143,32 +144,7 @@ export default {
           weatherImg:'',
           weatherLineImg:'',
           isSunny:true,
-          forecast:[{
-                sky: "구름많고 비",
-                c_high: "17도",
-                c_low: "5도",
-            }, {
-                sky: "맑음",
-                c_high: "13도",
-                c_low: "5도",
-            }, {
-                sky: "구름많고 비",
-                c_high: "17도",
-                c_low: "6도",
-            },{
-                sky: "구름많고 비",
-                c_high: "17도",
-                c_low: "11도",
-            }, {
-                sky: "맑고 구름",
-                c_high: "17도",
-                c_low: "5도",
-            }, {
-                sky: "구름많고 비",
-                c_high: "17도",
-                c_low: "5도",
-            }]
-
+          forecast:undefined
         };
     },
     methods: {
@@ -224,6 +200,22 @@ export default {
 };
 </script>
 <style scoped>
+@keyframes lightning {
+    0% {background-color: #252525;}
+    25% {background-color: #797979;}
+    30% {background-color: #797979;}
+    35% {background-color: #252525;}
+    60% {background-color: #797979;}
+    70% {background-color: #797979;}
+    75% {background-color: #252525;}
+    85% {background-color: #797979;}
+    90% {background-color: #797979;}
+    100% {background-color: #252525;}
+}
+.lightning{
+  animation-name:lightning;
+  animation-duration:.7s;
+}
 .sunny-img{
   position:absolute; width:514px; height:526px; top:167px; left:283px;
 }
@@ -508,7 +500,6 @@ div.wrapa {
 }
 
 #line{
-  width:168px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
