@@ -36,8 +36,18 @@
               </p>
             </div>
           </div>
+
+          <div class="res-wrapper" v-if="req.flag=='exception'">
+            <div class="exception">
+              <p class="textarea1">
+                오늘날씨, 내일날씨, 이번주날씨를 검색할 수 있습니다.<br>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+
+
       <div class="textView-wrapper">
         <textView v-model="textMessage" @keyup.enter="sendMessage"></textView>
       </div>
@@ -56,7 +66,7 @@
   overflow: auto;
 }
 .req-wrapper {
-  /* float: right; */
+  float: right;
 }
 .request {
   margin-top: 13px;
@@ -125,7 +135,13 @@
 }
 .res {
   width: 288px;
-  height: 240px;
+  height: 210px;
+  margin-top: 70px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+.exception {
+  width: 288px;
   margin-top: 70px;
   border-radius: 10px;
   background-color: #f0f0f0;
@@ -152,7 +168,7 @@ export default {
     sendMessage() {
       if(this.textMessage === "") return;
 
-     
+     var BASE_URL = "http://us-central1-depromeet-mini1-team4.cloudfunctions.net"
       var obj = {
         lat: "",
         lon: "",
@@ -175,7 +191,7 @@ export default {
       } else if(this.textMessage=== "이번주날씨"){
           obj.chat = 2;
       } else {
-          alert("오늘날씨, 내일날씨, 이번주날씨를 검색할 수 있습니다.");
+          this.requests.push({flag :'exception'});
           this.textMessage = "";
           return;
       }
