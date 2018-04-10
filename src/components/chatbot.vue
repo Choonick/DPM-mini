@@ -152,8 +152,7 @@ export default {
     sendMessage() {
       if(this.textMessage === "") return;
 
-      const BASE_URL =
-        "http://us-central1-depromeet-mini1-team4.cloudfunctions.net";
+     
       var obj = {
         lat: "",
         lon: "",
