@@ -5,15 +5,15 @@
       <p><span class="date">{{date1}}</span><span id="date2" class="date" style="margin-left:16px; display:inline-block;">{{date2}}</span></p>
       <p id="description" v-html="description"></p>
        <div id="line">
-        <div id="num">
-          {{c_current}}16&deg;
+        <div v-if="!Number.isNaN(c_current)" id="num">
+          {{c_current}}&deg;
         </div>
         <div id="mal" style="margin-top:12px;">
           <div>
-            {{sky}}맑음
+            {{sky}}
           </div>
           <div>
-            {{c_low}}4&deg;/{{c_high}}11&deg;
+            {{c_low}}&deg;/{{c_high}}&deg;
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
             </td>
           </tr>
           <tr>
-            <td v-for="f of forecast" class="cell-tempe">{{`${f.c_low.slice(0,-1)}&deg;/${f.c_high.slice(0,-1)}&deg;`}}</td>
+            <td v-for="f of forecast" class="cell-tempe">{{`${f.c_low}&deg;/${f.c_high}&deg;`}}</td>
           </tr>
         </table>
       </div>
@@ -191,29 +191,32 @@ export default {
       }
       this.date1 = `${this.monthDate} Apr. ${year}`;
       this.date2 = `${year}년 ${this.month+1}월 ${this.monthDate}일 ${day}요일`;
-      // this.$EventBus.$on('weather', (res) => {
-        // this.isSunny = !!(res.rain) ? false : true; 
+      this.$EventBus.$on('weather', (res) => {
+        console.log(1);
+        console.log(res);
+        console.log(typeof res);
+        this.isSunny = res.sky.indexOf('비')===-1 && res.sky.indexOf('눈')===-1 ? true : false; 
         if(!this.isSunny){
           this.description = '천둥번개를 동반한 비가 오는 날씨입니다<br>새벽에 다시 맑아질 예정입니다';
-          // this.sky = res.sky;
-          // this.c_current = res.c_current;
-          // this.c_low = res.c_low;
-          // this.c_high = res.c_high;
+          this.sky = res.sky;
+          this.c_current = parseInt(res.c_current, 10);
+          this.c_low = parseInt(res.c_low);
+          this.c_high = parseInt(res.c_high);
           this.weatherImg = require('../assets/img/cloud.png');
           this.weatherLineImg = require('../assets/img/cloud-line.png');
           this.backgroundColor='#252525';
 
         }else{
           this.description = '어디서 무얼 하든 기분 좋은 날씨입니다<br>오후에 구름이 낄 예정입니다';
-          // this.sky = res.sky;
-          // this.c_current = res.c_current;
-          // this.c_low = res.c_low;
-          // this.c_high = res.c_high;
+          this.sky = res.sky;
+          this.c_current = parseInt(res.c_current);
+          this.c_low = parseInt(res.c_low);
+          this.c_high = parseInt(res.c_high);
           this.weatherImg = require('../assets/img/clear.png');
           this.weatherLineImg = require('../assets/img/yellow-line.svg');
           this.backgroundColor='#2855ff';
         }
-      // });
+      });
       this.$EventBus.$on('week-weather', (res) => {
         this.forecast = res.forecast;
       });
@@ -491,7 +494,6 @@ div.wrapa {
 }
 
 #mal{
-  width: 57px;
   height: 63px;
   font-family: SpoqaHanSans;
   font-size: 16px;
