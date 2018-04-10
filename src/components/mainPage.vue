@@ -1,28 +1,25 @@
 <template>
-  <div class="wrapa" style="position:relative; overflow:hidden">
+  <div class="wrapa" style="position:relative; overflow:hidden" v-bind:style="{backgroundColor:backgroundColor}">
     <div id="textinfo">
       <h1 id="title">Weather</h1>
-      <p><span class="date">7 Apr.2018 </span><span id="date2" class="date" style="margin-left:16px; display:inline-block;"> 2018년 4월 7일 토요일</span></p>
-      <p id="description">
-        어디서 무얼 하든 기분 좋은 날씨입니다<br>
-        오후에 구름이 낄 예정입니다
-      </p>
-      <div id="line">
+      <p><span class="date">{{date1}}</span><span id="date2" class="date" style="margin-left:16px; display:inline-block;">{{date2}}</span></p>
+      <p id="description" v-html="description"></p>
+       <div id="line">
         <div id="num">
-          16<sup>o</sup>
+          {{c_current}}16&deg;
         </div>
         <div id="mal" style="margin-top:12px;">
           <div>
-            맑음
+            {{sky}}맑음
           </div>
           <div>
-            12&#8451;/23&#8451;
+            {{c_low}}4&deg;/{{c_high}}11&deg;
           </div>
         </div>
       </div>
       <div id="next">
         <img id="dust" src="../assets/invalid-name.svg">
-        <div id="dust-next" style="line-height:1.3">
+        <div id="dust-next" style="line-height: 1.38;">
           <div>
             미세먼지
           </div>
@@ -32,117 +29,219 @@
         </div>
       </div>
     </div>
-    <img src="../assets/img/clear.png" srcset="../assets/img/clear@2x.png 2x, ../assets/img/clear@3x.png 3x" 
-      style="position:absolute; width:514px; height:526px; top:167px; left:283px;">
-    <img src="../assets/img/yellow-line.svg" style="width:398px; height:190px; margin-top:64px; margin-left:23px;">
-    <p id="weather-detail">오늘의 날씨 자세히 보기</p>
-    <div class="white-box">
-      <h2 class="table-title">Temperature</h2>
-      <h3 class="table-subtitle">날짜별 날씨</h3>
-      <table style="border-collapse:collapse;">
-        <colgroup>
-          <col class="inside-border">
-          <col class="inside-border">
-          <col class="inside-border">
-          <col class="inside-border">
-          <col class="inside-border">
-        </colgroup>
-        <tr>
-          <th class="cell first-cell">오늘</th>
-          <th class="cell">오늘</th>
-          <th class="cell">오늘</th>
-          <th class="cell">오늘</th>
-          <th class="cell">오늘</th>
-          <th class="cell">오늘</th>
-        </tr>
-        <tr>
-          <td class=""><img class="cell-icon" src="../assets/img/sunny-icon.svg"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/sunny-icon.svg"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/sunny-icon.svg"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/sunny-icon.svg"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/sunny-icon.svg"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/sunny-icon.svg"></td>
-        </tr>
-        <tr>
-          <td class="cell-tempe">12/13</td>
-          <td class="cell-tempe">12/13</td>
-          <td class="cell-tempe">12/13</td>
-          <td class="cell-tempe">12/13</td>
-          <td class="cell-tempe">12/13</td>
-          <td class="cell-tempe">12/13</td>
-        </tr>
-      </table>
-    </div>
-    <div class="white-box">
-      <h2 class="table-title">Fine dust</h2>
-      <h3 class="table-subtitle">미세먼지 농도</h3>
-      <table style="border-collapse:collapse;">
-        <colgroup>
-          <col class="inside-border">
-          <col class="inside-border">
-          <col class="inside-border">
-          <col class="inside-border">
-          <col class="inside-border">
-        </colgroup>
-        <tr>
-          <th class="cell first-cell">오늘</th>
-          <th class="cell">14일</th>
-          <th class="cell">15일</th>
-          <th class="cell">16일</th>
-          <th class="cell">17일</th>
-          <th class="cell">18일</th>
-        </tr>
-        <tr>
-          <td class=""><img class="cell-icon cell-icon2" src="../assets/img/dust.svg" style="opacity:0.1;"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/dust.svg" style="opacity:0.4;"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/dust.svg" style="opacity:0.4"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/dust.svg"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/dust.svg"></td>
-          <td class=""><img class="cell-icon" src="../assets/img/dust.svg"></td>
-        </tr>
-        <tr>
-          <td class="dust-amount">적음</td>
-          <td class="dust-amount">보통</td>
-          <td class="dust-amount">보통</td>
-          <td class="dust-amount">많음</td>
-          <td class="dust-amount">많음</td>
-          <td class="dust-amount">많음</td>
-        </tr>
-        <tr>
-          <td class="expect"></td>
-          <td class="expect"></td>
-          <td class="expect">예상</td>
-          <td class="expect">예상</td>
-          <td class="expect">예상</td>
-          <td class="expect">예상</td>
-        </tr>
-      </table>
-    </div>
-    <div class="white-box" style="position:relative;">
-      <h2 class="table-title">BMNT/EENT</h2>
-      <h3 class="table-subtitle" style="margin-bottom:29px;">일출 · 일몰</h3>
-      <img src="../assets/img/sunrise.svg" style="display:block; margin:0 auto;">
-      <div class="sunrise-tag" style="top:242px; left:88px;">일출</div>
-      <div class="sunrise-tag" style="top:242px; right:88px;">일출</div>
-      <div class="sunrise-time-tag" style="left:82px;">07:12</div>
-      <div class="sunrise-time-tag" style="right:82px">18:13</div>
-    </div>
-    <address style="margin-top:138px; margin-left:39px;">
-      <div style="margin-bottom:30px;">
-        <h2 class="wc">Weather Chatbot</h2>
-        <div class="copy">Copyright@2018 DPM All rights reserved.</div>
+    <img v-bind:src="weatherImg" v-bind:class="{ 'sunny-img': isSunny, 'cloud-img': !isSunny }"> 
+    <img v-if="!isSunny" src="../assets/img/cloud2.png" class="cloud-img"> 
+    <img v-bind:src="weatherLineImg" v-bind:class="{ 'sunny-line': isSunny, 'cloud-line': !isSunny }">
+    <div>
+      <p id="weather-detail">오늘의 날씨 자세히 보기</p>
+      <div class="white-box">
+        <h2 class="table-title">Temperature</h2>
+        <h3 class="table-subtitle">날짜별 날씨</h3>
+        <table style="border-collapse:collapse;">
+          <colgroup>
+            <col class="inside-border">
+            <col class="inside-border">
+            <col class="inside-border">
+            <col class="inside-border">
+            <col class="inside-border">
+          </colgroup>
+          <tr>
+            <th class="cell first-cell">오늘</th>
+            <th class="cell" v-for="n in 5">{{`${month+1}/${monthDate+n}`}}</th>
+          </tr>
+          <tr>
+            <td v-for="f of forecast" class="">
+              <img v-if="f.sky.indexOf('비')===-1 && f.sky.indexOf('눈')===-1" class="cell-icon" src="../assets/img/sunny-icon.svg">
+              <img v-else class="cell-icon" src="../assets/img/cloud-icon.svg">
+            </td>
+          </tr>
+          <tr>
+            <td v-for="f of forecast" class="cell-tempe">{{`${f.c_low.slice(0,-1)}&deg;/${f.c_high.slice(0,-1)}&deg;`}}</td>
+          </tr>
+        </table>
       </div>
-      <div>
-        <div><span class="front">Front-end</span><span class="contr">최형석 &nbsp;&nbsp;박종훈</span></div>
-        <div><span class="front">Back-end</span><span class="contr">오기환 &nbsp;&nbsp;김민호</span></div>
-        <div><span class="front">Designer</span><span class="contr">임철규</span></div>
+      <div class="white-box">
+        <h2 class="table-title">Fine dust</h2>
+        <h3 class="table-subtitle">미세먼지 농도</h3>
+        <table style="border-collapse:collapse;">
+          <colgroup>
+            <col class="inside-border">
+            <col class="inside-border">
+            <col class="inside-border">
+            <col class="inside-border">
+            <col class="inside-border">
+          </colgroup>
+          <tr>
+            <th class="cell first-cell">오늘</th>
+            <th class="cell" v-for="n in 5">{{`${monthDate+n}일`}}</th>
+          </tr>
+          <tr>
+            <td class=""><img class="cell-icon cell-icon2" src="../assets/img/dust.svg" style="opacity:0.1;"></td>
+            <td class=""><img class="cell-icon" src="../assets/img/dust.svg" style="opacity:0.4;"></td>
+            <td class=""><img class="cell-icon" src="../assets/img/dust.svg" style="opacity:0.4"></td>
+            <td class=""><img class="cell-icon" src="../assets/img/dust.svg"></td>
+            <td class=""><img class="cell-icon" src="../assets/img/dust.svg"></td>
+            <td class=""><img class="cell-icon" src="../assets/img/dust.svg"></td>
+          </tr>
+          <tr>
+            <td class="dust-amount">적음</td>
+            <td class="dust-amount">보통</td>
+            <td class="dust-amount">보통</td>
+            <td class="dust-amount">많음</td>
+            <td class="dust-amount">많음</td>
+            <td class="dust-amount">많음</td>
+          </tr>
+          <tr>
+            <td class="expect"></td>
+            <td class="expect"></td>
+            <td class="expect">예상</td>
+            <td class="expect">예상</td>
+            <td class="expect">예상</td>
+            <td class="expect">예상</td>
+          </tr>
+        </table>
       </div>
-    </address>
+      <div class="white-box" style="position:relative;">
+        <h2 class="table-title">BMNT/EENT</h2>
+        <h3 class="table-subtitle" style="margin-bottom:29px;">일출 · 일몰</h3>
+        <img src="../assets/img/sunrise.svg" style="display:block; margin:0 auto;">
+        <div class="sunrise-tag" style="top:242px; left:88px;">일출</div>
+        <div class="sunrise-tag" style="top:242px; right:88px;">일출</div>
+        <div class="sunrise-time-tag" style="left:82px;">07:12</div>
+        <div class="sunrise-time-tag" style="right:82px">18:13</div>
+      </div>
+      <address style="margin-top:138px; margin-left:39px; margin-bottom:48px;">
+        <div style="margin-bottom:30px;">
+          <h2 class="wc">Weather Chatbot</h2>
+          <div class="copy">Copyright@2018 DPM All rights reserved.</div>
+        </div>
+        <div>
+          <div><span class="front">Front-end</span><span class="contr">최형석 &nbsp;&nbsp;박종훈</span></div>
+          <div><span class="front">Back-end</span><span class="contr">오기환 &nbsp;&nbsp;김민호</span></div>
+          <div><span class="front">Designer</span><span class="contr">임철규</span></div>
+        </div>
+      </address>
+    </div>
   </div>
   
 </template>
+<script>
+export default {
+    data() {
+        return {
+          start:false,
+          date1:'',
+          date2:'',
+          month:'',
+          monthDate:'',
+          description:'',
+          c_current:'',
+          c_low:'',
+          c_high:'',
+          sky:'',
+          backgroundColor:'',
+          weatherImg:'',
+          weatherLineImg:'',
+          isSunny:true,
+          forecast:[{
+                sky: "구름많고 비",
+                c_high: "17도",
+                c_low: "5도",
+            }, {
+                sky: "맑음",
+                c_high: "13도",
+                c_low: "5도",
+            }, {
+                sky: "구름많고 비",
+                c_high: "17도",
+                c_low: "6도",
+            },{
+                sky: "구름많고 비",
+                c_high: "17도",
+                c_low: "11도",
+            }, {
+                sky: "맑고 구름",
+                c_high: "17도",
+                c_low: "5도",
+            }, {
+                sky: "구름많고 비",
+                c_high: "17도",
+                c_low: "5도",
+            }]
 
+        };
+    },
+    methods: {
+
+    },
+    created() {
+      var date = new Date();
+      var year = date.getFullYear();
+      this.month = date.getMonth();
+      this.monthDate = date.getDate();
+      var day = date.getDay();
+      switch(day){
+        case 0: day = '일'; break;
+        case 1: day = '월'; break;
+        case 2: day = '화'; break;
+        case 3: day = '수'; break;
+        case 4: day = '목'; break;
+        case 5: day = '금'; break;
+        case 6: day = '토'; break;
+      }
+      this.date1 = `${this.monthDate} Apr. ${year}`;
+      this.date2 = `${year}년 ${this.month+1}월 ${this.monthDate}일 ${day}요일`;
+      // this.$EventBus.$on('weather', (res) => {
+        // this.isSunny = !!(res.rain) ? false : true; 
+        if(!this.isSunny){
+          this.description = '천둥번개를 동반한 비가 오는 날씨입니다<br>새벽에 다시 맑아질 예정입니다';
+          // this.sky = res.sky;
+          // this.c_current = res.c_current;
+          // this.c_low = res.c_low;
+          // this.c_high = res.c_high;
+          this.weatherImg = require('../assets/img/cloud.png');
+          this.weatherLineImg = require('../assets/img/cloud-line.png');
+          this.backgroundColor='#252525';
+
+        }else{
+          this.description = '어디서 무얼 하든 기분 좋은 날씨입니다<br>오후에 구름이 낄 예정입니다';
+          // this.sky = res.sky;
+          // this.c_current = res.c_current;
+          // this.c_low = res.c_low;
+          // this.c_high = res.c_high;
+          this.weatherImg = require('../assets/img/clear.png');
+          this.weatherLineImg = require('../assets/img/yellow-line.svg');
+          this.backgroundColor='#2855ff';
+        }
+      // });
+      this.$EventBus.$on('week-weather', (res) => {
+        this.forecast = res.forecast;
+      });
+    },
+};
+</script>
 <style scoped>
+.sunny-img{
+  position:absolute; width:514px; height:526px; top:167px; left:283px;
+}
+.sunny-line{
+  width:398px; height:190px; margin-top:64px; margin-left:23px;
+}
+.cloud-img{
+  position:absolute;
+  width: 709px;
+  height: 473px;
+  object-fit: contain;
+  top:202px;
+  left:240px;
+}
+.cloud-line{
+  width: 387px;
+  height: 203px;
+  margin-top:61px;
+  margin-left:22px;
+  object-fit: contain;
+}
 .contr{
   font-family: SpoqaHanSans;
   font-size: 12px;
