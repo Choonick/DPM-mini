@@ -1,6 +1,7 @@
 <template>
   <div id="wrap">
-      <mainPage id="main"></mainPage>
+      <router-view id="main"/>
+      <!--<mainPage id="main"></mainPage>-->
       <chatbot id="chatbot"></chatbot>
   </div>
 </template>

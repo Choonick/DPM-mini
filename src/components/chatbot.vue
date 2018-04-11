@@ -151,6 +151,7 @@
 
 <script>
 import textView from "./textView.vue";
+import router from "../router/index.js";
 
 export default {
   components: {
@@ -160,7 +161,8 @@ export default {
   data() {
     return {
       textMessage: "",
-      requests: []
+      requests: [],
+      isFirst:true
     };
   },
 
@@ -175,7 +177,24 @@ export default {
       
 
       if(this.textMessage === "") return;
+      if(this.isFirst === true){
+                router.push({ path: 'chat' });
+                this.isFirst = false;
+              }
+      if(this.textMessage === '어두운날씨'){
+        this.$EventBus.$emit('weather', {
+          c_current:"13.90",
+          c_high:"16.00",
+          c_low:"9.00",
+          humidity:"85.20",
+          rain:"비온다",
+          sky:"비 온다고 치자",
+          wind:"2.40",
+        });
+        return; 
+      }
 
+      
      var BASE_URL = "http://us-central1-depromeet-mini1-team4.cloudfunctions.net"
       var obj = {
         lat: "",
@@ -219,6 +238,12 @@ export default {
           this.$http
             .get(`${BASE_URL}/weatherPlanet/chatbot`, { params: obj })
             .then(res => {
+              if(obj.chat !== 2){
+                this.$EventBus.$emit('weather', res.data);  
+              }else{
+                this.$EventBus.$emit('week-weather', res.data);  
+              }
+              
               console.log(res.data);
               var info = {
                 wind: res.data.wind,
