@@ -6,7 +6,7 @@
           <div class="basic-res" style="line-height:1.3; padding:16px;"> 
             <p class="textarea1" >
             맛있는 점심 드셨나요?<br>
-            오늘의 날씨가 궁금하다면
+            오늘의 날씨가 궁금하다면<br><br>
           </p>
           <p class="textarea2" style="margin-top:16px;">
             오늘의 날씨를 검색해주세요.
@@ -40,7 +40,7 @@
           <div class="res-wrapper" v-if="req.flag=='exception'">
             <div class="exception">
               <p class="textarea1">
-                오늘날씨, 내일날씨, 이번주날씨를 검색할 수 있습니다.<br>
+                {{req.textArea}}<br>
               </p>
             </div>
           </div>
@@ -60,10 +60,10 @@
   /* flex-direction: column !important; */
 }
 .textView-wrapper {
-  padding-top: 42px;
+  padding-top: 24px;
 }
 #wrapper {
-  overflow: auto;
+  overflow: scroll;
 }
 .req-wrapper {
   float: right;
@@ -110,13 +110,13 @@
   color: #4a4a4a;
 }
 .basic-textarea {
-  width: 288px;
+  /* width: 288px; */
   height: 141px;
   border-radius: 10px;
   background-color: #f0f0f0;
 }
 
-.message-wrapper {
+#message-wrapper {
   padding: 16px;
   padding-top: 20%;
   height: 500px;
@@ -148,6 +148,7 @@
 <script>
 import textView from "./textView.vue";
 import router from "../router/index.js";
+
 export default {
   components: {
     textView
@@ -162,7 +163,15 @@ export default {
   },
 
   methods: {
+    scrollToEnd() {
+        var wrap = document.querySelector('#message-wrapper');
+        var scrollHeight = wrap.scrollHeight;
+        wrap.scrollTop = scrollHeight;
+    },
     sendMessage() {
+
+      
+
       if(this.textMessage === "") return;
       if(this.isFirst === true){
                 router.push({ path: 'chat' });
@@ -181,6 +190,8 @@ export default {
         });
         return; 
       }
+
+      
      var BASE_URL = "http://us-central1-depromeet-mini1-team4.cloudfunctions.net"
       var obj = {
         lat: "",
@@ -198,14 +209,17 @@ export default {
 
       if(this.textMessage === "오늘날씨"){
         obj.chat = 0;
-
       } else if(this.textMessage === "내일날씨"){
           obj.chat = 1;
-      } else if(this.textMessage=== "이번주날씨"){
-          obj.chat = 2;
+      } else if(this.textMessage === "이번주날씨"){
+        this.requests.push({flag :'exception', textArea: '아 손가락 아파요. 날씨 화면 옆에 있어요.'});
+        this.textMessage = "";
+        this.scrollToEnd();
+        return;
       } else {
-          this.requests.push({flag :'exception'});
+          this.requests.push({flag :'exception', textArea: '오늘날씨, 내일날씨, 이번주날씨를 검색할 수 있습니다.'});
           this.textMessage = "";
+          this.scrollToEnd();
           return;
       }
 
@@ -238,6 +252,7 @@ export default {
               };
               console.log("info===", { info: info, flag: "response" });
               this.requests.push({ info: info, flag: "response" });
+              this.scrollToEnd();
             });
 
           // 위치 정보 받아오는 함수
@@ -268,6 +283,10 @@ export default {
         this.textMessage = "";
       }
     }
+  },
+  mounted() {
+    this.scrollToEnd();
   }
+
 };
 </script>
