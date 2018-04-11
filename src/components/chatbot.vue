@@ -6,7 +6,7 @@
           <div class="basic-res">
             <p class="textarea1">
             맛있는 점심 드셨나요?<br>
-            오늘의 날씨가 궁금하다면
+            오늘의 날씨가 궁금하다면<br><br>
           </p>
           <p class="textarea2">
             오늘의 날씨를 검색해주세요.
@@ -60,7 +60,7 @@
   /* flex-direction: column !important; */
 }
 .textView-wrapper {
-  padding-top: 42px;
+  padding-top: 24px;
 }
 #wrapper {
   overflow: scroll;
@@ -87,9 +87,9 @@
   color: #ffffff;
 }
 .textarea2 {
-  padding-left: 16px;
-  width: 256px;
-  height: 24px;
+  /* padding-left: 16px; */
+  /* width: 256px; */
+  /* height: 24px; */
   font-family: SpoqaHanSans;
   font-size: 16px;
   font-weight: bold;
@@ -101,8 +101,8 @@
   color: #212121;
 }
 .textarea1 {
-  padding: 16px;
-  width: 256px;
+  /* padding: 16px; */
+  /* width: 256px; */
   font-family: SpoqaHanSans;
   font-size: 16px;
   font-weight: normal;
@@ -114,7 +114,7 @@
   color: #4a4a4a;
 }
 .basic-textarea {
-  width: 288px;
+  /* width: 288px; */
   height: 141px;
   border-radius: 10px;
   background-color: #f0f0f0;
@@ -127,21 +127,23 @@
   overflow: auto;
 }
 .basic-res {
-  width: 288px;
-  height: 141px;
+  padding: 16px;
+  /* width: 288px; */
+  /* height: 141px; */
   border-radius: 10px;
   background-color: #f0f0f0;
   position: relative;
 }
 .res {
-  width: 288px;
-  height: 210px;
+  /* width: 288px; */
+  padding: 16px;
   margin-top: 70px;
   border-radius: 10px;
   background-color: #f0f0f0;
 }
 .exception {
-  width: 288px;
+  /* width: 288px; */
+  padding: 16px;
   margin-top: 70px;
   border-radius: 10px;
   background-color: #f0f0f0;
