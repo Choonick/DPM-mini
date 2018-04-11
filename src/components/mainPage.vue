@@ -9,6 +9,9 @@
         <div v-if="!Number.isNaN(c_current)" id="num">
           {{c_current}}&deg;
         </div>
+        <div v-else id="num">
+          18&deg;
+        </div>
         <div id="mal" style="margin-top:12px;">
           <div>
             {{sky}}

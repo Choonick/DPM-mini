@@ -28,7 +28,7 @@ export default {
 <style scoped>
 #wrap {
   margin:0 auto;
-  width:980px;
+  width:959px;
   background: #ffffff;
 }
 #main {

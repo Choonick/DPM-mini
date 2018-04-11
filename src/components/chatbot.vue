@@ -1,14 +1,14 @@
 <template>
-  <div id="wrapper">
-      <div class="message-wrapper" >
+  <div id="wrapper" style="line-height:1.3;">
+      <div class="message-wrapper"  ref="myid">
 
         <div class="res-wrapper" >
-          <div class="basic-res">
-            <p class="textarea1">
+          <div class="basic-res" style="line-height:1.3; padding:16px;"> 
+            <p class="textarea1" >
             맛있는 점심 드셨나요?<br>
             오늘의 날씨가 궁금하다면
           </p>
-          <p class="textarea2">
+          <p class="textarea2" style="margin-top:16px;">
             오늘의 날씨를 검색해주세요.
           </p>
           </div>
@@ -27,7 +27,7 @@
               <p class="textarea1">
                 날씨가 어떠한들 기분은 좋기 마련입니다.<br>
               </p>
-              <p class="textarea2">
+              <p class="textarea2" style="margin-top:9px">
                 {{req.info.sky}} {{req.info.c_current}}<br>
                 미세먼지 적음 30<br><br>
                 최고온도 {{req.info.c_high}}<br>
@@ -87,9 +87,6 @@
   color: #ffffff;
 }
 .textarea2 {
-  padding-left: 16px;
-  width: 256px;
-  height: 24px;
   font-family: SpoqaHanSans;
   font-size: 16px;
   font-weight: bold;
@@ -101,7 +98,6 @@
   color: #212121;
 }
 .textarea1 {
-  padding: 16px;
   width: 256px;
   font-family: SpoqaHanSans;
   font-size: 16px;
@@ -126,22 +122,22 @@
   height: 500px;
   overflow: auto;
 }
+.message-wrapper::-webkit-scrollbar { 
+  display: none; 
+}
 .basic-res {
-  width: 288px;
-  height: 141px;
   border-radius: 10px;
   background-color: #f0f0f0;
   position: relative;
 }
 .res {
-  width: 288px;
-  height: 210px;
   margin-top: 70px;
   border-radius: 10px;
   background-color: #f0f0f0;
+  padding:16px;
 }
 .exception {
-  width: 288px;
+  padding:16px;
   margin-top: 70px;
   border-radius: 10px;
   background-color: #f0f0f0;
@@ -172,6 +168,7 @@ export default {
                 router.push({ path: 'chat' });
                 this.isFirst = false;
               }
+      this.$refs["myid"].scrollTop = this.$refs["myid"].scrollHeight;
       if(this.textMessage === '어두운날씨'){
         this.$EventBus.$emit('weather', {
           c_current:"13.90",
